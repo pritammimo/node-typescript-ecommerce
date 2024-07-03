@@ -5,5 +5,5 @@ import authMiddleware from "../middlewares/auth";
 const authRoutes:Router=Router()
 authRoutes.post("/signup",ErrorHandler(signup))
 authRoutes.post("/login",ErrorHandler(login))
-authRoutes.get("/me",(authMiddleware),ErrorHandler(me))
+authRoutes.get("/me",[authMiddleware],ErrorHandler(me))
 export default authRoutes
