@@ -1,4 +1,4 @@
-import express,{Request,Response,NextFunction} from "express";
+import {Request,Response,NextFunction} from "express";
 import { prismaClient } from "..";
 import { hashSync,compareSync } from "bcrypt";
 import * as jwt from "jsonwebtoken";
@@ -44,4 +44,7 @@ export const login=async(req:Request,res:Response)=>{
     }
     const token=jwt.sign({userId:user.id},JWT_SECRET)
     res.json({user,token})
+}
+export const me=async(req:any,res:Response)=>{
+    res.json(req.user)
 }
