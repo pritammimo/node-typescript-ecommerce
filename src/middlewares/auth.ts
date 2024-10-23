@@ -4,8 +4,9 @@ import { UnauthorizedException } from "../exceptions/unauthorized";
 import * as jwt from "jsonwebtoken"
 import { JWT_SECRET } from "../secrets";
 import { prismaClient } from "..";
+import { User } from "@prisma/client";
 
-const authMiddleware=async(req:any,res:Response,next:NextFunction)=>{
+const authMiddleware=async(req:Request,res:Response,next:NextFunction)=>{
    const token=req.headers.authorization
    if(!token){
     next(new UnauthorizedException("Unauthorized",ErrorCode.UNAUTHORIZED))
@@ -20,7 +21,7 @@ const authMiddleware=async(req:any,res:Response,next:NextFunction)=>{
      if(!user){
       next(new UnauthorizedException("Unauthorized",ErrorCode.UNAUTHORIZED))
      }
-     req.user=user as any
+     req.user=user as User
      next()
     } catch (error) {
      next(new UnauthorizedException("Unauthorized",ErrorCode.UNAUTHORIZED))

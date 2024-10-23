@@ -5,7 +5,7 @@ import { Address, User } from "@prisma/client"
 import { prismaClient } from ".."
 import { BadRequestException } from "../exceptions/bad-request"
 
-export const addAddress=async(req:any,res:Response)=>{
+export const addAddress=async(req:Request,res:Response)=>{
   const address=await prismaClient.address.create({
     data:{
         ...req.body,
@@ -29,7 +29,7 @@ export const addAddress=async(req:any,res:Response)=>{
         message:"Address deleted successfully"
        })
     }
-    export const listAddress=async(req:any,res:Response)=>{
+    export const listAddress=async(req:Request,res:Response)=>{
       const address=await prismaClient.address.findMany({
         where:{
             userId:req.user.id
@@ -37,7 +37,7 @@ export const addAddress=async(req:any,res:Response)=>{
       })
       res.json(address)
     }
-    export const updateUser=async(req:any,res:Response)=>{
+    export const updateUser=async(req:Request,res:Response)=>{
         let shippingaddress:Address;
         let billingaddress:Address;
         try {
